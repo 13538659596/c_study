@@ -1,0 +1,155 @@
+sudo apt-get update 	更新
+sudo apt-get install 安装软件
+touch xxxx            创建文件
+mkdir                 创建文件夹
+
+vim 操作:
+     i       变成插入模式
+	 esc     变成命令模式
+	 : 		 在命令模式下按:,底下出现: 在：后面输入w 表示write写入，即保存。
+	 命令模式下:
+	       shift+a    		行尾插入
+		   shift+i    		行首插入
+		   shift+o    		上一行插入
+		   x          		删除光标位置的字符
+		   dd         		删除光标位置所在的行
+		   ./xxx      		执行当前目录下的xxx文件
+		   :w	      		保存文件
+		   :wq        		保存文件并退出
+		   :wqa       		保存所有文件并退出
+		   :sp xxx    		新建文件
+		   ctrl + w + ↓ 	跳转到小一个文件
+		   :set nu    		打开行号
+		   x + dd      		剪切光标下的x行内容
+		   p           		复制剪切板内容
+		   gcc xxx -o sss   编译xxx文件生成sss.out文件
+		   gcc -c xxx.c -o ttt.o   编译文件成o文件，可以连接到其他c文件一起编译。
+		   cp xxx sss       复制xxx文件生成sss文件
+		   rm * .xxx        删除所有以xxx结尾的文件
+		   mv xxx sss       把xxx文件名修改为sss
+		   echo $?          输出程序运行结果,0表示运行成功
+		   
+Makefile文件:
+hello.out:min.o max.o hello.c
+	  gcc min.o max.o hello.c
+min.o:min.c
+	  gcc -c min.c
+max.o:max.c
+	  gcc -c max.c
+调用直接调用make
+
+标准输入输出错误流
+stdin
+stdout
+stderr
+
+
+
+
+
+
+文件搜索命令
+	whereis  which 命令
+	whereis只能查系统命令的命令的帮助文档的位置。
+	find 命令
+	grep搜索字符串
+帮助命令
+	man
+	help 只能获取shell内部命令的帮助
+	
+压缩与解压
+	.zip压缩:
+	     zip       压缩后的文件名   源文件
+		 zip -r    压缩后的文件名   源目录文件
+	.zip解压
+	     unzip     源文件
+		 
+	.gz压缩:
+		gzip         源文件(压缩完成后源文件消失)
+		gzip  -c     源文件  > 压缩后的文件名(压缩完成后源文件不消失)
+		gizp  -r     目录      (压缩目录下的所有子文件，但不能压缩目录)
+	.gz解压:
+		gizp -d       压缩文件(解压完成后会删除源压缩文件)
+		gunzip        压缩文件(解压完成后会删除源压缩文件)
+	
+·	.bz2压缩:  该命令不能压缩目录
+		bzip2          源文件(压缩后删除源文件)
+		bzip2 -k       源文件(删除后保存源文件)
+	.bz2解压:
+		bzip2 -d       压缩文件(解压完成后会删除源压缩文件)  bizp2 -k -d  解压后保存源文件
+		bunzip        压缩文件(解压完成后会删除源压缩文件)   bunzip2 -k   解压后保存源文件
+		
+		
+	tar打包命令:
+		tar -cvf     打包文件名   源文件（打包完成后会删除源文件）
+		选项:
+		    -c:     打包
+			-v:     显示过程
+			-f:     指定打包后的文件名
+		例如: tar -cvf abc.tar abc
+		
+		tar -zcvf  压缩包名.tar.gz     源文件
+		选项:
+			-z:    压缩为。tar.gz格式
+		
+	tar解包:
+		tar -xvf   文件名
+		例如: tar -xvf abc.tar abc
+		
+		
+别名:alias
+
+
+重定向:
+    命令 >> 文件 2>&1
+	命令 &>> 文件
+	命令 >> 文件1 2>> 文件2
+		
+		
+	
+网络配置	
+
+2、Ubuntu固定ip
+
+sudo vim /etc/network/interfaces
+
+修改如下部分：
+
+auto p3p1 
+iface p3p1 inet static 
+address 59.77.132.80
+netmask 255.255.255.0 #子网掩码
+gateway 59.77.132.127 #网关
+
+2. 修改dns解析
+
+sudo vim /etc/resolv.conf
+写上一个公网的DNS：
+nameserver 218.85.157.99
+nameserver 210.34.48.34
+nameserver 58.22.96.66
+
+3. 重启网卡或者重启：
+
+sudo /etc/init.d/networking restart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		   
