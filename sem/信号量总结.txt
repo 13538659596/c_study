@@ -1,0 +1,20 @@
+1.信号量	匿名		 	有名
+			sem_init		sem_open
+
+2.减少		sem_wait		sem_wait(减1的过程)
+
+3.增加		sem_post		sem_post(加一的过程)
+
+4.释放		sem_destroy		sem_close
+
+5.删除		N/G				sem_unlink
+
+如果man 手册查不到 pthread_mutex 这一类函数
+更新 manpages  sudo apt-get install manpages-posix-dev
+
+
+
+pthread_mutex_t  2中创建方式
+	一、POSIX定义了一个宏PTHREAD_MUTEX_INITIALIZER来静态初始化互斥锁，方法如下： pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER;
+	二、int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr) 
+	
