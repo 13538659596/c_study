@@ -52,19 +52,20 @@ int main()
 	}
 
 	printf("等待客户端的连接\n");
-	//memset(&addr, 0, sizeof(addr));
+	memset(&addr, 0, sizeof(addr));
+	int addrlen = sizeof(addr);
 
-	struct sockaddr_in cliaddr;
-	int addrlen = sizeof(cliaddr);
+	//struct sockaddr_in cliaddr;
+	//int addrlen = sizeof(cliaddr);
 	printf("after sockfd: %d\n", sockfd);
 
-	int client = accept(sockfd, (struct sockaddr *)&cliaddr, &addrlen);
+	int client = accept(sockfd, (struct sockaddr *)&addr, &addrlen);
 	
 	if(client == -1) {
 		perror("bind");
 		return -1;
 	}
-	printf("发现客户端连接: %s\n",inet_ntoa(cliaddr.sin_addr));
+	printf("发现客户端连接: %s\n",inet_ntoa(addr.sin_addr));
 	handle_cilent(client);
                 
 	
