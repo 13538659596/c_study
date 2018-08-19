@@ -55,6 +55,8 @@ int main()
 		sem_post(sem1);
 		wait(NULL);
 	}
+	sem_destroy(sem1);
+    sem_destroy(sem2);
 	return 0;
 }
 
