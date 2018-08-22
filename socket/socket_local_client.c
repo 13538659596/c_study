@@ -10,16 +10,12 @@
 #define SERVER_NAME "./socket"
 #define MSG_LEN 1024
 //客户端
-
-
 void * my_rec(void * arg); 
 void * my_send(void * arg);
-
 int main() 
 {	
 	//创建本地socket
 	int sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
-	printf("sockfd %d\n",sockfd);
 	if(sockfd == -1) {
 		perror("socket");
 		return -1;
@@ -32,22 +28,17 @@ int main()
 	int serfd = connect(sockfd, (struct sockaddr *)&addr, len);
 	if(serfd == -1) {
 		perror("connect");
+		close(sockfd);
 		return -1;
 	}
-	char buff[20] = "i am client";
-	 write(sockfd, buff, strlen(buff));
-
-	 while (1) {
-
-	 	}
 	
 	//创建两个线程。1个读数据，一个写数据
-	//pthread_t  p2;
-	//pthread_create(&p1, NULL,my_rec, &sockfd);
-    //pthread_create(&p2, NULL,my_send, &sockfd);                      
+	pthread_t p1, p2;
+	pthread_create(&p1, NULL,my_rec, &sockfd);
+    pthread_create(&p2, NULL,my_send, &sockfd);                      
 
-	//pthread_join(p1, NULL);
-	//pthread_join(p2, NULL);
+	pthread_join(p1, NULL);
+	pthread_join(p2, NULL);
 	
 	close(sockfd);
 	return 0;
@@ -77,7 +68,6 @@ void * my_rec(void * arg)
 void * my_send(void * arg) 
 {
 	int * sockfd = (int *)arg;
-	printf("sockfd 2 %d\n",*sockfd);
 	char buff[MSG_LEN + 1] = {0};
 	ssize_t len;
 	printf("请输入数据\n");
