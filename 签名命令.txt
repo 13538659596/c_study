@@ -1,0 +1,231 @@
+//加密狗
+序列号：A7AC 
+　合同号：0755201700/1031 
+　注册码：WRTIP-R43V6-PO0L2-NR90R-K0RN6 
+生成日期：2017-10-31 
+授权软件：ARG-801(8.1-3)
+
+
+89 hudong hd234
+
+app 文件夹 system/app/HostDevice
+删除文件夹 rm -rf 
+java -jar signapk.jar  platform.x509.pem platform.pk8 demo.apk new.apk  //把apk打包成系统应用
+adb shell pm list packages                                               //获取手机安装包
+insmod /system/lib/modules/i2c-keyboard.ko     //键盘驱动
+date -s "20170906.172000"     //设置系统时间
+adb nodaemon server         //查看adb端口
+netstat -aon|findstr "5037  //查看使用 5037端口的进程
+am start -n com.host.devices/.MainActivity   //adb 启动应用程序
+adb shell am force-stop com.host.devices
+input keyevent 82
+
+//取消红框
+setprop persist.sys.strictmode.visual 0
+setprop persist.sys.strictmode.disable 1
+
+
+
+adb shell am start -n com.wrtsz.intercom.master/com.wrtsz.intercom.master.MainActivity
+adb shell am start -n com.slientinstalltest/com.slientinstalltest.MainActivity 
+adb shell am start -n com.android.launcher3/com.android.launcher3.MainActivity
+am start -n com.android.launcher3/.Launcher
+
+
+
+adb shell am start -n com.uniubi.ufacesdkdemo/com.uniubi.ufacesdkdemo.SplashActivity
+adb shell am force-stop com.wrtsz.intercom.master
+
+
+adb root
+adb remount
+adb pull /system/build.prop d:\
+qemu.hw.mainkeys=1   //从系统屏蔽system bar
+adb push d:\build.prop /system
+
+cd  /data/camera
+rm *.raw
+
+//查看mac
+busybox ifconfig
+
+
+
+二维码   https://github.com/bingoogolapple/BGAQRCode-Android
+
+照片选择  https://github.com/bingoogolapple/BGAPhotoPicker-Android
+
+朋友圈图片预览  https://github.com/yangchaojiang/ZoomPreviewPicture
+
+
+
+
+
+AndridStudio获取秘钥
+cd Users\lenovo\.android
+keytool -list -v -keystore debug.keystore
+输入密钥库口令:android
+
+
+tools>adb remount 
+tools>adb shell 
+#su 
+#cd system/sd/data //进入系统内指定文件夹 
+#ls //列表显示当前文件夹内容 
+#rm -r xxx //删除名字为xxx的文件夹及其里面的所有文件 
+#rm xxx //删除文件xxx 
+#rmdir xxx //删除xxx的文件夹
+
+
+
+获取序列号：
+adb get-serialno
+
+查看连接计算机的设备：
+adb devices
+
+重启机器：
+adb reboot
+
+重启到bootloader，即刷机模式：
+adb reboot bootloader
+
+重启到recovery，即恢复模式：
+adb reboot recovery
+
+查看log：
+adb logcat
+
+终止adb服务进程：
+adb kill-server
+
+重启adb服务进程：
+adb start-server
+
+获取机器MAC地址：
+adb shell  cat /sys/class/net/wlan0/address
+
+获取CPU序列号：
+adb shell cat /proc/cpuinfo
+
+安装APK：
+adb install  //比如：adb install baidu.apk
+
+保留数据和缓存文件，重新安装apk：
+adb install -r  //比如：adb install -r baidu.apk
+
+安装apk到sd卡：
+adb install -s  // 比如：adb install -s baidu.apk
+
+卸载APK：
+adb uninstall  //比如：adb uninstall com.baidu.search
+
+卸载app但保留数据和缓存文件：
+adb uninstall -k  //比如：adb uninstall -k com.baidu.search
+
+启动应用：
+adb shell am start -n /.
+
+查看设备cpu和内存占用情况：
+adb shell top
+
+查看占用内存前6的app：
+adb shell top -m 6
+
+刷新一次内存信息，然后返回：
+adb shell top -n 1
+
+查询各进程内存使用情况：
+adb shell procrank
+
+杀死一个进程：
+adb shell kill [pid]
+
+查看进程列表：
+adb shell ps
+
+查看指定进程状态：
+adb shell ps -x [PID]
+
+查看后台services信息：
+adb shell service list
+
+查看当前内存占用：
+adb shell cat /proc/meminfo
+
+查看IO内存分区：
+adb shell cat /proc/iomem
+
+将system分区重新挂载为可读写分区：
+adb remount
+
+从本地复制文件到设备：
+adb push  
+
+从设备复制文件到本地：
+adb pull   
+
+列出目录下的文件和文件夹，等同于dos中的dir命令：
+adb shell ls
+
+进入文件夹，等同于dos中的cd 命令：
+adb shell cd 
+
+重命名文件：
+adb shell rename path/oldfilename path/newfilename
+
+删除system/avi.apk：
+adb shell rm /system/avi.apk
+
+删除文件夹及其下面所有文件：
+adb shell rm -r 
+
+移动文件：
+adb shell mv path/file newpath/file
+
+设置文件权限：
+adb shell chmod 777 /system/fonts/DroidSansFallback.ttf
+
+新建文件夹：
+adb shell mkdir path/foldelname
+
+查看文件内容：
+adb shell cat 
+
+查看wifi密码：
+adb shell cat /data/misc/wifi/*.conf
+
+清除log缓存：
+adb logcat -c
+
+查看bug报告：
+adb bugreport
+
+获取设备名称：
+adb shell cat /system/build.prop
+
+查看ADB帮助：
+adb help
+
+跑monkey：
+adb shell monkey -v -p your.package.name 500
+
+改文件名指令  mv
+
+
+http://116.31.80.211:83/car.htm
+
+
+chmod 777  /dev/bus/usb/004/002   指纹模块驱动
+
+app 路径  system/app/HostDevice
+
+app 分开升级 路径  system/HostDevice
+servere路径 system/bin/WRT_server
+
+
+git checkout - b de   //新建de分支
+git branch -r         //查看远程分支
+git branch -vv        //查看本地分支
+
+
