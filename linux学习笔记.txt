@@ -134,9 +134,10 @@ nameserver 58.22.96.66
 sudo /etc/init.d/networking restart
 
 
+解决的方法：man 手册查不到pthread_mutex相关的函数
 
-
-
+安装manpages：manpages-posix-dev
+sudo apt-get install manpages-posix-dev
 
 
 
