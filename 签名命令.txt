@@ -227,5 +227,7 @@ servere路径 system/bin/WRT_server
 git checkout - b de   //新建de分支
 git branch -r         //查看远程分支
 git branch -vv        //查看本地分支
+git branch -a 查看所有分支
+jni 学习地址:https://blog.csdn.net/qinjuning/article/details/7607214
 
 
