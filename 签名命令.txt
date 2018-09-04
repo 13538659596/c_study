@@ -18,6 +18,44 @@ adb nodaemon server         //查看adb端口
 netstat -aon|findstr "5037  //查看使用 5037端口的进程
 am start -n com.host.devices/.MainActivity   //adb 启动应用程序
 adb shell am force-stop com.host.devices
+
+1. 命令行输入：adb connect 172.16.4.37:5555 (:5555可省略）
+
+提示：unable to connect to 172.16.4.37:5555
+
+解决办法：
+
+ 1）手机与PC相连，执行以下命令：adb tcpip 5555
+
+      成功提示：restarting in TCP mode port 5555
+
+      如果手机没有和PC连接，直接使用以上命令会提示 error:device not found
+
+      然后断开USB
+
+    2）接着执行adb connect 172.16.4.37:5555，这时候应该就能连接成功了
+
+      成功提示：connected to 172.16.4.37:5555
+
+2. 输入adb devices，得到以下提示说明连接成功，可以进行各种调试了
+
+   List of devices attached
+
+   172.16.4.37:5555    devices
+
+3.调试完成之后，输入如下的命令断开连接：
+
+ adb disconnect 192.168.1.5:5555
+4.最后一步，需要把监听的网络端口重置为-1，监听USB端口（好像不做这一步，直接插上USB线也能正常使用，而且这一步经常会提示could not set property，需要root权限）
+
+    setprop service.adb.tcp.port -1
+
+    stop adbd
+
+    start adbd
+
+
+
 input keyevent 82
 
 //取消红框
