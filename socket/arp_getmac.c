@@ -62,13 +62,20 @@ int main()
 	struct ifreq req;
 	memset(&req, 0, sizeof(req));
 	strcpy(req.ifr_name, "ens33");
-	ioctl(sockfd, SIOCGIFINDEX, &req);
-
+	int ret	= ioctl(sockfd, SIOCGIFINDEX, &req);
+	if(ret == -1) {
+		perror("ioctl");
+		return -1;
+	}
+	printf("0000000000000000\n");
 	//初始化地址结构体
 	struct sockaddr_ll addr;
 	socklen_t addr_len = sizeof(addr);
 	memset(&addr, 0, addr_len);
 	addr.sll_ifindex = req.ifr_ifindex;
+	addr.sll_family   = PF_PACKET;
+    addr.sll_protocol = htons(ETH_P_ALL);
+
 
 	//发送apr请求
 	ssize_t len;
@@ -76,10 +83,11 @@ int main()
 	len = sendto(sockfd, buf, PACKET_LEN, 0,
                       (const struct sockaddr *)&addr, addr_len);
 	
+	printf("%ld\n", len);
 	if(len > 0) {
-		printf("发送成功");
+		printf("发送成功\n");
 	}else {
-		printf("发送失败");
+		printf("发送失败\n");
 	}
 
 
@@ -94,6 +102,7 @@ int main()
         //读取数据
         len = recvfrom(sockfd,buf, PACKET_LEN, 0,
                         NULL, NULL);
+		printf("recv: %s\n", buf);
         //解析数据
 		if(buf[21] == 2) {
 			sprintf(dest_mac, "%2x:%2x:%2x:%2x:%2x:%2x", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5]);
