@@ -115,21 +115,23 @@ sudo vim /etc/network/interfaces
 
 修改如下部分：
 
-auto p3p1 
-iface p3p1 inet static 
+auto ens33 
+iface ens33 inet static 
 address 59.77.132.80
 netmask 255.255.255.0 #子网掩码
 gateway 59.77.132.127 #网关
 
 2. 修改dns解析
 
-sudo vim /etc/resolv.conf
+sudo vim /etc/resolvconf/resolv.conf.d/base
 写上一个公网的DNS：
 nameserver 218.85.157.99
 nameserver 210.34.48.34
 nameserver 58.22.96.66
 
 3. 重启网卡或者重启：
+
+4.设置linu网络的连接模式为桥接模式
 
 sudo /etc/init.d/networking restart
 
@@ -138,6 +140,62 @@ sudo /etc/init.d/networking restart
 
 安装manpages：manpages-posix-dev
 sudo apt-get install manpages-posix-dev
+
+安装open JDK
+sudo add-apt-repository ppa:openjdk-r/ppa  
+sudo apt-get update   
+sudo apt-get install openjdk-7-jdk 
+如果安装成功之后还是不能用可能不有多个版本，选的不对
+
+root下配置jdk
+cd ~
+vim .bashrc
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+
+
+安装samba服务器
+sudo apt-get insall samba
+sudo apt-get install smbfs
+mkdir /home/hd/workspace
+
+//修改配置
+vim /etc/samba/smb.conf
+[share]
+      path = /home/hd/workspace
+      available = yes
+      browseable = yes
+      public = yes
+      writable = yes
+	  
+ubantu14.04  sudo apt-get install smbfs装不上
+可能无法访问共享文件夹，修复方式
+$ sudo apt-get remove samba libtalloc2
+$ sudo apt-get autoremove
+$ sudo apt-get install samba libtalloc2
+
+
+
+解压.7z文件
+首先需要安装7z软件
+#apt-get install p7zip-full
+
+解压缩：
+7za X test.7z
+
+
+命令行方式:
+压缩 7za a -t7z -mx=9 test.7z test-dir
+
+参数解释：
+a           添加一个归档文件
+-t7z       表明这是一个7z的文件
+-mx=9   表明我们需要极限的压缩比。默认为5
+test.7z  压缩为test.7z文件
+test-dir 压缩的文件夹为test-dir
+
 
 
 
