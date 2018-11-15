@@ -1,3 +1,5 @@
+//cÔÚÏßapi  http://program.upc.edu.cn/CHelp/tmpnam.htm
+
 #include "test.h"
 #include "commen.h"
 #include <android/log.h>
