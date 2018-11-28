@@ -19,13 +19,15 @@ netstat -aon|findstr "5037  //查看使用 5037端口的进程
 am start -n com.host.devices/.MainActivity   //adb 启动应用程序
 adb shell am force-stop com.host.devices
 
+
 setprop ctl.stop wrts  //停止运行服务
 setprop ctl.start wrts  //启动运行服务
 
 //进入bin\classes 下执行
 javap -classpath . -s    包名.类名   可以输入jni的方法签名
 javah -classpath . -jni  包名.类名   将java文件生成对应的.h头文件
-
+//引入安卓类
+javah -classpath .;D:\androidutils\adt-bundle-windows-x86-20131030\sdk\platforms\android-8\android.jar -jni 包名.类名   将java文件生成对应的.h头文件
 
 1. 命令行输入：adb connect 172.16.4.37:5555 (:5555可省略）
 
