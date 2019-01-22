@@ -98,3 +98,7 @@ Field 2: stream-key-your-set
 用ffplay播放RTMP直播流：
 ffplay "rtmp://pub1.guoshi.com/live/newcetv1 live=1"
 
+
+ffplay 没有声音
+set SDL_AUDIODRIVER=directsound
+
