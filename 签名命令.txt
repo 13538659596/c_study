@@ -1,4 +1,4 @@
-//加密狗
+﻿//加密狗
 序列号：A7AC 
 　合同号：0755201700/1031 
 　注册码：WRTIP-R43V6-PO0L2-NR90R-K0RN6 
@@ -276,6 +276,10 @@ git checkout - b de   //新建de分支
 git branch -r         //查看远程分支
 git branch -vv        //查看本地分支
 git branch -a 查看所有分支
+
+gitbash带用户名密码克隆私有仓库代码
+git clone https://DZUAV:zhang781119@github.com/DZUAV/SmaritKitApp.git
+
 jni 学习地址:https://blog.csdn.net/qinjuning/article/details/7607214
 
 
