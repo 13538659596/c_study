@@ -10,5 +10,55 @@ git stash pop
 
 方法2、如果你想完全地覆盖本地的代码，只保留服务器端代码，则直接回退到上一个版本，再进行pull：
 
-git reset --hard
+git reset --hard             参数soft指的是：保留当前工作区，以便重新提交 
+		    还可以选择参数hard，会撤销相应工作区的修改，一定要谨慎使用
+git reset --soft    
+
 git pull origin master
+
+Git撤销已经推送(push)至远端仓库的提交(commit)信息
+	git log
+	git reset --soft 回到某次提交
+	git push origin master –force 强制提交当前版本号，以达到撤销版本号的目的
+
+
+git发布版本：
+	git tag -a 版本号
+	git push origin 版本号
+
+列出已有的tag
+	git tag
+	git -l ""过滤
+
+新建tag
+	git tag tag名字
+	git tag -a tag名字     创建一个带备注的tag
+
+
+查看tag详细信息
+	git show tagName
+
+给指定的某个commit号加tag
+	git tag -a v1.2 commitId
+
+将tag同步到远程服务器
+	git push origin [tagName]推送单个分支
+	推送本地所有tag，使用git push origin --tags。
+
+
+切换到某个tag
+	git tag
+	git checkout tagName
+
+
+删除某个tag
+	git tag -d v0.1.2 
+远端删除
+	git push origin :refs/tags/<tagName>
+
+
+
+
+
+
+
